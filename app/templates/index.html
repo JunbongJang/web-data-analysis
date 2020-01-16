@@ -1,0 +1,141 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Welcome to ALI Data Analysis tool{% endblock %}
+{% block body %}
+
+<header id="home-section">
+    <div class="dark-overlay">
+      <div class="home-inner container">
+        <div class="row">
+          <div class="col-lg-8 d-none d-lg-block">
+            <h1 class="display-4" style="color:white;">
+                Online Data Analysis for everyone
+            </h1>
+            <div class="d-flex">
+              <div class="p-4 align-self-start">
+                <i class="fas fa-check fa-2x"></i>
+              </div>
+              <div class="p-4 align-self-center white-text-style">
+                Submit the CSV file
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="p-4 align-self-start">
+                <i class="fas fa-check fa-2x"></i>
+              </div>
+              <div class="p-4 align-self-center white-text-style">
+                Edit your data
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="p-4 align-self-start">
+                <i class="fas fa-check fa-2x"></i>
+              </div>
+              <div class="p-4 align-self-center white-text-style">
+                Get the analysis report
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card card-form green_background">
+              <div class="card-body">
+                <h3 class="gray-text-style">Submit Data Here</h3>
+                <p class="gray-text-style">Please choose csv file only</p>
+
+                  <form id="csv_file_form" method="post" enctype=multipart/form-data>
+                        <div class="custom-file mb-3">
+                            <input id="csv_input_file" name="file"
+                                   class="custom-file-input d-inline" type="file"
+                                   onchange="handleFileInput(this.value)"
+                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                   required>
+                            <label class="custom-file-label"
+                                   for="csv_input_file"
+                                   id="csv_input_label">Choose file...</label>
+                            <div class="invalid-feedback">Example invalid custom file feedback</div>
+                        </div>
+
+                        <select class="custom-select form-group">
+                            <option selected>Type of Linear Model</option>
+                            <option value="1">Linear Regression</option>
+                            <option value="2">Logistic Regression</option>
+                            <option value="3">Mediation & Moderation</option>
+                            <option value="4">ANOVA</option>
+                            <option value="5">MANOVA</option>
+                            <option value="6">Factorial Analysis</option>
+                        </select>
+
+                        <div class="custom-control custom-checkbox form-group">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Option 1</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox form-group">
+                          <input type="checkbox" class="custom-control-input" id="customCheck2">
+                          <label class="custom-control-label" for="customCheck2">Option 2</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox form-group">
+                          <input type="checkbox" class="custom-control-input" id="customCheck3">
+                          <label class="custom-control-label" for="customCheck3">Option 3</label>
+                        </div>
+
+                        <button class="btn btn-light btn-block mt-2"
+                                style="color: black; font-weight: bold;"
+                                onclick="document.getElementById('csv_file_form').submit()">Submit</button>
+
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="jumbotron mt-3">
+      <h1>Welcome to ALI Boost Tutorial</h1>
+      <p class="lead">Here you will learn about how to use ALI Boost</p>
+    </div>
+{#    https://stackoverflow.com/questions/11832930/html-input-file-accept-attribute-file-type-csv#}
+
+</div>
+
+    <script>
+    {#https://stackoverflow.com/questions/857618/javascript-how-to-extract-filename-from-a-file-input-control#}
+     function handleFileInput(fullPath){
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        document.getElementById('csv_input_label').innerText=filename;
+     }
+    window.onload = function() {
+        var picture_number = 2;
+        setInterval(function() {
+            setBackgroundImage(picture_number);
+            if (picture_number < 3) {
+                picture_number++;
+            } else {
+                picture_number = 1;
+            }
+        }, 5000);
+
+    }
+
+    function setBackgroundImage(picture_number) {
+        document.getElementById('home-section').style.background = "url(img/main_background"+ picture_number +".jpg)";
+        document.getElementById('home-section').style.backgroundRepeat = 'no-repeat';
+        document.getElementById('home-section').style.backgroundSize = 'cover';
+        document.getElementById('home-section').style.backgroundAttachment = 'fixed';
+    }
+    </script>
+
+{% endblock %}

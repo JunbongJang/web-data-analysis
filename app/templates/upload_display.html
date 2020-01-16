@@ -1,0 +1,49 @@
+<!-- upload_display.html-->
+
+{% extends "base.html" %}
+{% block title %}Upload Display{% endblock %}
+{% block body %}
+    <div class="mx-5">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="{{ spreadsheet_url }}" frameborder="0"></iframe>
+        </div>
+
+        <form action="/result/{{ filename }}"
+              method="post" class="mt-3">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="dependent_var_id">Dependent Variable</label>
+                </div>
+                <select class="custom-select" id="dependent_var_id" name="dependent_var">
+                    <option selected>Choose...</option>
+                    {% for variable in columns %}
+                        <option value="{{ variable }}">{{ variable }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Independent Variable</span>
+                </div>
+                <input type="text"
+                       name="independent_var"
+                       class="form-control"
+                       value="amt1, jelt1, subt1, cpt1, rdt1, a01">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary btn-lg mt-2 mb-4">
+                    Analyze
+                </button>
+            </div>
+        </form>
+
+
+
+    </div>
+
+
+
+{% endblock %}
